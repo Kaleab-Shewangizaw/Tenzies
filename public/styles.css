@@ -47,3 +47,7 @@ main button {
   font-weight: bold;
   cursor: pointer;
 }
+
+button.held {
+  background-color: #59e391;
+}

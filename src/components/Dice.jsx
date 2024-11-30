@@ -1,3 +1,10 @@
 export default function Dice(props) {
-  return <button>{props.value}</button>;
+  return (
+    <button 
+      className={props.isHeld ? "held" : undefined} 
+      onClick={props.hold}
+      >
+      {props.value}
+    </button>
+  );
 }
