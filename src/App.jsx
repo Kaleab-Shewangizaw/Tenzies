@@ -1,9 +1,9 @@
 import Dice from "./components/Dice";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import Cofetti from "react-confetti";
 export default function App() {
   function generateAllNewDice() {
-
     return new Array(10).fill(0).map(() => ({
       value: Math.ceil(Math.random() * 6),
       isHeld: false,
@@ -22,10 +22,11 @@ export default function App() {
     />
   ));
 
-  if (dice.filter((die) => die.isHeld).length === 10 && dice.every(die => die.value === dice[0].value)) {
-    console.log("game over");
-    
-  }
+  const gameWon =
+    dice.every((die) => die.isHeld) &&
+    dice.every((die) => die.value === dice[0].value);
+
+
   const hold = (id) => {
     setDice(
       dice.map((die) => {
@@ -49,10 +50,11 @@ export default function App() {
   return (
     <>
       <main>
+        {gameWon && <Cofetti />}
         <h1>Tenzies</h1>
         <div className="container">{diceElement}</div>
 
-        <button onClick={rolldice}>Roll Dice</button>
+        <button onClick={rolldice}>{gameWon ? "New Game" : "Roll"}</button>
       </main>
     </>
   );
