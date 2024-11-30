@@ -11,7 +11,7 @@ export default function App() {
     }));
   }
 
-  const [dice, setDice] = useState(generateAllNewDice());
+  const [dice, setDice] = useState(() => generateAllNewDice());
 
   const diceElement = dice.map((num, index) => (
     <Dice
@@ -40,11 +40,16 @@ export default function App() {
   };
 
   const rolldice = () => {
-    setDice((oldDice) =>
-      oldDice.map((die) =>
-        die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
-      )
-    );
+    if(!gameWon){
+
+        setDice((oldDice) =>
+            oldDice.map((die) =>
+                die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
+    )
+);
+}else{
+    setDice(generateAllNewDice())
+}
   };
 
   return (
