@@ -14,13 +14,16 @@ export default function App() {
     //   .map((val, index) => (
     //     <Dice value={Math.ceil(Math.random() * 6)} key={index} />
     //   ));
-    return new Array(10).fill(0).map(() => Math.ceil(Math.random() * 6));
+    return new Array(10).fill(0).map(() => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+    }));
   }
 
   const [dice, setDice] = useState(generateAllNewDice());
 
   const diceElement = dice.map((num, index) => (
-    <Dice value={num} key={index} />
+    <Dice value={num.value} key={index} />
   ));
 
   // const dice = generateAllNewDice().map((die, index)=>{
@@ -33,10 +36,8 @@ export default function App() {
   return (
     <>
       <main>
-        <div className="container">
-          {diceElement} 
-        </div>
-        
+        <div className="container">{diceElement}</div>
+
         <button onClick={rolldice}>Roll Dice</button>
       </main>
     </>
